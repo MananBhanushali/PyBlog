@@ -13,3 +13,20 @@ def index():
 def user(name):
 	return render_template("user.html", user_name=name)
     # return f"<h1>Hello {name}</h1>"	
+
+
+# Custom Error Pages
+
+# Page Not Found Error
+@app.errorhandler(404)
+
+def page_not_found_error(error):
+	return render_template("error404.html"), 404
+
+# Internal Server Error
+@app.errorhandler(500)
+
+def internal_server_error(error):
+	return render_template("error500.html"), 500
+
+
