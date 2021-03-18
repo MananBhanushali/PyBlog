@@ -15,7 +15,12 @@ load_dotenv(env_path)
 # Creating and Configuring The Flask App
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+
+# Old sqlite3 Database
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
+
+# MySQL DB
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:mananbhanushali@localhost/users"
 
 # Initializing the Database
 db = SQLAlchemy(app)
