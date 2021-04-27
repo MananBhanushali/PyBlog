@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, request
 from flask_wtf import FlaskForm
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from dotenv import load_dotenv
@@ -25,11 +26,15 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:mananbhanushali@lo
 # Initializing the Database
 db = SQLAlchemy(app)
 
+# Setup Flask Migrate
+migrate = Migrate(app, db)
+
 
 # Create Models
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
+    name = db.Column(
+        db.String(200), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow())
 
